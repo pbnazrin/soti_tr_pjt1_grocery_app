@@ -1,0 +1,19 @@
+<h2 class="text-center">Products</h2>
+<div class="row">
+    <div class="col-sm-4" *ngFor="let product of products">
+      <div class="card">
+        <img src="{{'http://rjtmobile.com/grocery/images/'+product.image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{product.productNme}}</h5>
+          <p class="card-text">{{product.unit}}</p>
+          <h2>{{product.price|currency:'INR'}}
+            <span class="mrp"><del>{{product.mrp|currency:'INR'}}</del></span>
+          </h2>
+          <!-- <a href="#" class="btn btn-primary btn-block">Show details</a> -->
+          <a routerLink="{{'/products/details/'+product._id}}" class="btn btn-primary btn-block">Show details</a>
+          <!-- hyperlinking using anchor tag -->
+        </div>
+      </div>
+    </div>
+    
+  </div>

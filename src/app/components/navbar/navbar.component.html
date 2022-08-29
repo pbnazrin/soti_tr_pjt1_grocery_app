@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">Grocery App</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <!-- <a class="nav-link" href="/home">Home </a> -->
+        <a class="nav-link" routerLink="/home">Home </a>
+        <!-- router link to avoid refreshing -->
+      </li>
+      <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/products">Products</a>
+        </li> -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contact">Contact</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.checkToken()">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          *ngIf="!authService.checkToken()"
+          routerLink="/login"
+          >Login</a
+        >
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a *ngIf="authService.checkToken()" class="nav-link">{{
+          "Welcome " + name
+        }}</a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="authService.logout()"
+          *ngIf="authService.checkToken()"
+          class="nav-link"
+          routerLink="/home"
+          >Logout</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

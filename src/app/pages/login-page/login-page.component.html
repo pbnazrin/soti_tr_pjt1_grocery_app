@@ -1,0 +1,69 @@
+<div class="container">
+  <h1><a routerLink="/">Grocery App</a></h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <div class="wrapper">
+        <!-- <div class="alert alert-success" role="alert"></div> -->
+        <div class="{{ 'alert ' + loginClass }}" role="alert">
+          {{ loginResponse }}
+        </div>
+        <!-- class="{{'alert'+loginClass}}" -> alert success or alert danger -->
+        <h2>Login</h2>
+        <hr />
+        <form [formGroup]="loginForm" (submit)="onSubmitHandler()">
+          <div class="form-group">
+            <label for="">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              [class.is-invalid]="email?.invalid && email?.touched"
+            />
+            <div *ngIf="email?.errors && email?.touched">
+              <small class="text-danger" *ngIf="email?.errors?.['required']"
+                >Email is required</small
+              >
+              <small class="text-danger" *ngIf="email?.errors?.['pattern']"
+                >Email is not valid</small
+              >
+            </div>
+
+            <!-- [class.is-invalid]="loginForm.get('email').touched"/> -->
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input
+              type="Password"
+              class="form-control"
+              formControlName="password"
+              [class.is-invalid]="password?.invalid && password?.touched"
+            />
+          </div>
+          <div *ngIf="password?.errors && password?.touched">
+            <small class="text-danger" *ngIf="password?.errors?.['required']"
+              >password is required</small
+            >
+            <small class="text-danger" *ngIf="password?.errors?.['minlength']"
+              >Password must be of 6 characters</small
+            >
+          </div>
+          <input
+            type="submit"
+            value="Login"
+            class="btn btn-primary btn-block"
+          />
+        </form>
+        <br />
+        <p class="text-center">
+          <a routerLink="/register">New User? Click Here</a>
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+</div>
+<!-- <form #loginForm="ngForm" (submit)="onFormSubmit(loginForm.value)"></form> -->
+<!-- Need to apply validation.angulr provides 6 validations: ng-touched,ng-untouches,ng-pristine,ng-dirty,ng-valid,ng-invalid -->

@@ -1,0 +1,25 @@
+.nav-link{
+    color:black;
+    font-weight:600
+    }
+    .navbar-brand{
+        color:black;
+        font-size: 40px;
+        font-weight:800;
+    }
+    .carousel-caption{
+        position:absolute;
+        top:35%;
+        transform:translateY(-40%);
+        transform:translateX(60%)
+    }
+    .carousel-caption h1{
+        color:black;
+        font-size: 70px;
+        font-weight: 400;
+    }
+    .carousel-caption p{
+        color:black;
+         font-size: 30px;
+        font-weight: 400; 
+    }

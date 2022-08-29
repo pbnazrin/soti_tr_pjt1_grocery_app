@@ -1,0 +1,146 @@
+<div class="container">
+  <h1><a routerLink="/">Grocery App</a></h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <div class="wrapper">
+        <h2>Register</h2>
+        <hr />
+        <!-- template driven -->
+        <!-- ngForm is used to convert form into angular -->
+        <!-- <form #registerForm="ngForm"> -->
+        <!-- <form #registerForm="ngForm" (submit)="onFormSubmit(registerForm.value)"> -->
+        <!-- <h2>{{registerForm.value}}</h2> -->
+        <form #registerForm="ngForm" (submit)="onFormSubmit()">
+          <!-- <h2>{{registerForm.value |json}}</h2> -->
+          <!-- above gives [object object] -->
+          <!-- ngModel tells that these data have to be managed by angular form -->
+          <!-- name attribute must be set to use ngModel -->
+          <!-- <hr> -->
+          <!-- <h2>{{userModel|json}}</h2> -->
+          <!-- Data in userModel has to be displayed in form ( property in user.model.ts to template -> property binding) -->
+          <!-- Then apply 2 way data binding using banana in box model -> [(ngModel)] -->
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <!-- <input type="text"  name="firstname" id="firstname" class="form-control"  [(ngModel)]="userModel.firstName"> -->
+            <!-- Validation -->
+            <!-- #firstname is the reference variable for firstname -->
+            <input
+              #firstName="ngModel"
+              type="text"
+              name="firstname"
+              id="firstname"
+              class="form-control"
+              [(ngModel)]="userModel.firstName"
+              required
+              [class.is-invalid]="firstName.invalid && firstName.touched"
+            />
+            <!-- <h2>{{firstName.className}} <input #firstName .../h2> -->
+            <!-- <h2>{{firstName.touched}}</h2> -> returns boolean -> <input #firstName="ngModel" ....-->
+
+            <!-- <h2>{{firstName.touched}}</h2> -->
+            <small
+              class="text-danger"
+              [class.d-none]="firstName.untouched || firstName.valid"
+              >This is required</small
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="userModel.email"
+              #email="ngModel"
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              [class.is-invalid]="email.invalid && email.touched"
+            />
+
+            <div *ngIf="email.errors && email.touched">
+              <small class="text-danger" *ngIf="email.errors['required']"
+                >Email is required</small
+              >
+              <small class="text-danger" *ngIf="email.errors['pattern']"
+                >Email is not valid</small
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input
+              type="text"
+              name="mobile"
+              id="mobile"
+              class="form-control"
+              [(ngModel)]="userModel.mobile"
+              #mobile="ngModel"
+              required
+              pattern="^\d{10}"
+              [class.is-invalid]="mobile.touched && mobile.invalid"
+            />
+            <div *ngIf="mobile.errors && mobile.touched">
+              <!-- <small
+                class="text-danger"
+                [class.d-none]="mobile.valid || mobile.untouched"
+                >Phone is reqired and must be of 10 digits</small
+              > -->
+              <small class="text-danger" *ngIf="mobile.errors['required']"
+                >Phone is required</small
+              >
+              <small class="text-danger" *ngIf="mobile.errors['pattern']"
+                >Phone must be 10 digits</small
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pass">Password</label>
+            <input
+              type="password"
+              name="pass"
+              id="pass"
+              class="form-control"
+              [(ngModel)]="userModel.password"
+              #password="ngModel"
+              required
+              minlength="6"
+              [class.is-invalid]="password.invalid && password.touched"
+            />
+            <div *ngIf="password.errors && password.touched">
+              <!-- <small
+                  class="text-danger"
+                  [class.d-none]="mobile.valid || mobile.untouched"
+                  >Phone is reqired and must be of 10 digits</small
+                > -->
+              <small class="text-danger" *ngIf="password.errors['required']"
+                >password is required</small
+              >
+              <small class="text-danger" *ngIf="password.errors['pattern']"
+                >password must be of 6 digits</small
+              >
+            </div>
+          </div>
+          <input
+            type="submit"
+            [disabled]="registerForm.invalid"
+            value="Register"
+            class="btn btn-primary btn-block"
+          />
+          <p class="text-center">
+            <a href="/login">Already registered? Click here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+</div>
+<!-- <form #registerForm="ngForm" (submit)="onFormSubmit(registerForm.value)"></form> -->
+<!-- Need to apply validation.angulr provides 6 validations: ng-touched,ng-untouches,ng-pristine,ng-dirty,ng-valid,ng-invalid -->
